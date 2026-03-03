@@ -1,3 +1,5 @@
+// Aula 1 sobre Matchers
+
 // este arquivo testa funções para verificar se estão funcionando corretamente
 // toBe compara valores simples como números e strings
 // toEqual compara objetos e arrays completamente
@@ -159,3 +161,21 @@ describe("Teste Raças Diferentes Em Estoque", () => {
         expect(racas_loja_x).not.toEqual(racas_loja_y)
     });
 })
+
+// Testando com toThrow
+
+// test('testando a função de nomes', () => {
+// 	expect(() => sum(2, 'a')).toThrow('Os valores precisam ser numericos')
+// })
+
+test('testando a função de nomes', () => {
+	expect(() => nome('Senai')).toThrow('Nome inválido')
+})
+
+// test('testando a função de nomes', () => {
+// 	try {
+//         expect(() => nome('senai'))
+//     } catch (error) {
+//         error.message()
+//     }
+// })
