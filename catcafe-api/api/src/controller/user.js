@@ -1,0 +1,9 @@
+
+export const getAllAnimals = async (req, res) => {
+	try {
+		const [rows] = await pool.query('SELECT * FROM animals');
+		res.json(rows);
+	} catch (err) {
+		res.status(500).json({ error: err.message });
+	}
+};
