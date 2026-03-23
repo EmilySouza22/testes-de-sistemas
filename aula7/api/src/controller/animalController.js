@@ -18,10 +18,12 @@ export const createAnimal = async (req, res) => {
 
     // BUG 5: Vulnerável a injeção de SQL (interpolação direta)
     // Dica: Use marcadores de posição (?)
-    const query = `INSERT INTO animals (name, species, age, price) VALUES ('${name}', '${species}', ${age}, ${price})`;
+    // Bug corrigido
+    const query = `INSERT INTO animals (name, species, age, price) VALUES (?, ?, ?, ?)`;
 
-    const [result] = await pool.query(query);
+    const [result] = await pool.query(query, [name, species, age, price]);
     res.status(201).json({ id: result.insertId, ...req.body });
+    
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -33,7 +35,13 @@ export const deleteAnimal = async (req, res) => {
     const [result] = await pool.query("DELETE FROM animals WHERE id = ?", [id]);
 
     // BUG 6: Retorna 200 OK mesmo se o ID não existir (affectedRows === 0)
-    res.json({ message: "Animal deleted successfully" });
+    // Bug corrigido
+    if(result.affectedRows){
+        res.json({ message: "Animal deleted successfully" });
+    }else{
+        res.status(404).json({ message: "Animal not found" });
+    }
+
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
