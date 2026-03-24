@@ -1,9 +1,22 @@
+const { createAccount } = require('../component/user');
 
-export const getAllAnimals = async (req, res) => {
+const Controller = {};
+
+Controller.handleCreateAccount = async (req, res) => {
+	// TODO, realizar validações
+
 	try {
-		const [rows] = await pool.query('SELECT * FROM animals');
-		res.json(rows);
-	} catch (err) {
-		res.status(500).json({ error: err.message });
+		const userData = req.body;
+		const result = await createAccount(userData);
+
+		res.status(201).json({
+			success: true,
+			message: 'Account created successfully.',
+			data: result,
+		});
+	} catch (error) {
+		res.status(400).json({ success: false, error: error.message });
 	}
 };
+
+module.exports = Controller;

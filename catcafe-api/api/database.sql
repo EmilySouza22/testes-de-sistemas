@@ -67,10 +67,10 @@ CREATE TABLE IF NOT EXISTS adoptions (
     FOREIGN KEY (cat_id) REFERENCES cats(id)
 );
 
-CREATE TABLE IF NOT EXISTS favorites (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    cat_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (cat_id) REFERENCES cats(id)
-);
+-- CREATE TABLE IF NOT EXISTS favorites (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+--     user_id INT NOT NULL,
+--     cat_id INT NOT NULL,
+--     FOREIGN KEY (user_id) REFERENCES users(id),
+--     FOREIGN KEY (cat_id) REFERENCES cats(id)
+-- );
