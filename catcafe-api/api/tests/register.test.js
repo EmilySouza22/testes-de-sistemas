@@ -1,4 +1,4 @@
-const { validateRegister } = require('../../src/component/validator.js');
+const { validateRegister } = require('../../src/components/validator.js');
 
 //Sucess
 test('Validação usuário criado com sucesso', () => {

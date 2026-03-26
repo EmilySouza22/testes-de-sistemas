@@ -3,7 +3,7 @@ const express = require('express')
 const route = express.Router()
 
 //controller
-const { handleCreateAccount } = require('../controller/user.js');
+const { handleCreateAccount } = require('../controllers/user.js');
 
 // TODO, adicionar os endpoints aqui
 route.post('/create', handleCreateAccount);
