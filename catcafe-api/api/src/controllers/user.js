@@ -1,52 +1,26 @@
 const { createAccount } = require('../components/user');
+const { validateEmail } = require('../components/validator');
 
 const Controller = {};
 
 Controller.handleCreateAccount = async (req, res) => {
 	// validações dos dados da requisição
+
 	const userData = req.body;
 
-	if (!userData.name) {
-		res.status(400).json({
-			success: false,
-			error: 'Campo nome é obrigatório',
+	try {
+		const result = await createAccount(userData);
+		return res.status(201).json({
+			success: true,
+			message: 'Account created successfully.',
+			data: result,
 		});
-	}
-
-    if(!userData.email) {
+	} catch (error) {
         res.status(400).json({
             sucess: false,
-            error: 'Campo email é obrigatório'
+            message: error
         })
     }
-
-    if(!userData.password) {
-        res.status(400).json({
-            sucess: false,
-            error: 'O campo senha é obrigatório'
-        })
-    }
-
-    if(!userData.phone) {
-        res.status(400).json({
-            sucess: false,
-            error: 'O campo telefone é obrigatório'
-        })
-    }
-
-    if(userData.email.includes('@')){
-        res.status(400).json({
-            sucess: false,
-            error: 'Email inválido'
-        })
-    }
-
-	const result = await createAccount(userData);
-	res.status(201).json({
-		success: true,
-		message: 'Account created successfully.',
-		data: result,
-	});
 };
 
 module.exports = Controller;

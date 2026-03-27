@@ -44,6 +44,21 @@ Validator.validateEmail = (email) => {
 	if (!email) {
 		throw new Error('The email cannot remain empty');
 	}
+
+	if (email) {
+		let containsAt = 0;
+
+		for (let char of email) {
+			if (char === '@') {
+				containsAt++;
+			}
+		}
+
+		if (containsAt === 0 || containsAt > 1) {
+			throw new Error('The email cannot remain empty');
+		}
+	}
+	return email;
 };
 
 Validator.validatePassword = (password) => {

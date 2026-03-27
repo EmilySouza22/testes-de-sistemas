@@ -1,11 +1,13 @@
 //Importando router do express
-const express = require('express')
-const route = express.Router()
+const express = require('express');
+const router = express.Router();
 
 //controller
 const { handleCreateAccount } = require('../controllers/user.js');
 
 // TODO, adicionar os endpoints aqui
-route.post('/create', handleCreateAccount);
+router.post('/create', async (req, res) => {
+	await handleCreateAccount(req, res);
+});
 
-module.exports = route;
+module.exports = router;
